@@ -1,0 +1,52 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% block title %}Login{% endblock title %}
+{% block main-content %}
+
+<div class="container py-5">
+  <div class="row my-3">
+    <div class="col-sm-6 offset-sm-3">
+      <!-- Light grey title -->
+       
+      <h3 style="color: #6c757d; text-align: center;">Login</h3>
+
+      <hr>
+      <form action="#" method="post" novalidate class="shadow p-5">
+        <!-- CSRF Token -->
+        {% csrf_token %}
+        
+        <!-- Form fields -->
+        {% for fm in form %}
+        <div class="form-group">
+            {{ fm.label_tag }}
+            {{ fm }}
+            <!-- Error messages in red -->
+            <small class="text-danger">{{ fm.errors|striptags }}</small><br>
+        </div>
+        {% endfor %}
+        
+        <!-- Forgot Password Link -->
+        <small><a href="{% url 'password_reset' %}" class="text-dark">Forgot Password ?</a></small><br>
+        
+        <!-- Submit Button with grey color -->
+        <input type="submit" class="btn" value="Login" style="background-color: #6c757d; color: white; font-weight: bold;">
+        
+        <br>
+        <!-- New Account Link with bold text -->
+        <div class="text-center">
+          <small style="color: #6c757d; font-weight: bold;">New to CartNext ? 
+            <a href="{% url 'customerregistration' %}" class="text-danger" style="font-weight: bold;">Create an Account</a>
+          </small>
+        </div>
+        
+        <!-- Non-field errors -->
+        {% if form.non_field_errors %}
+        {% for error in form.non_field_errors %}
+        <p class="alert alert-danger my-3">{{ error }}</p>
+        {% endfor %}
+        {% endif %}
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock main-content %}

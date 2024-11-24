@@ -1,0 +1,49 @@
+/* Owl Carousel Item Styles */
+.owl-carousel .item {
+  /* border: 1px solid black; */ /* Uncomment if a border is needed */
+  font-size: 24px;
+  text-align: center;
+  margin-top: 20px;
+}
+
+/* Navigation Button Styles */
+.owl-next {
+  float: right;
+}
+
+.owl-prev {
+  float: left;
+}
+
+.owl-prev span,
+.owl-next span {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+/* Carousel Inner Container */
+.carousel-inner {
+  height: 400px; /* Set the desired height */
+}
+
+.carousel-inner .carousel-item img {
+  height: 100%;
+  object-fit: cover; /* Ensures the image scales properly without distortion */
+}
+
+    .feature-box {
+      text-align: center;
+      padding: 20px;
+    }
+    .feature-box img {
+      width: 50px;
+      margin-bottom: 15px;
+    }
+    .feature-box h5 {
+      font-weight: bold;
+      margin: 10px 0;
+    }
+    .feature-box p {
+      color: #6c757d;
+    }
+  

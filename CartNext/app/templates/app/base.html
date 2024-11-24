@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<!--Since static files r used i.e. CSS, JS, Images-->
+{% load static %}
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1"
+      crossorigin="anonymous"
+    />
+
+    <!--Owl Carousel CSS-->
+    <link rel="stylesheet" href="{% static 'app/css/owl.carousel.min.css' %}" />
+
+    <!--FontAwesome CSS-->
+    <link rel="stylesheet" href="{% static 'app/css/all.min.css' %}" />
+
+    <!--Custom CSS-->
+    <link rel="stylesheet" href="{% static 'app/css/style.css' %}" />
+
+    <title>ChartNext| {% block title %} {% endblock title %}</title>
+  </head>
+
+  <body>
+    <!-- Navbar Section -->
+    <!-- Navbar Section -->
+<nav class="navbar navbar-expand-xl navbar-light bg-secondary">
+  <div class="container">
+    <!-- Logo -->
+    <a class="navbar-brand " href="/">CartNext</a> <!-- Bold CartNext -->
+    
+    <!-- Navbar Toggler -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Navbar Content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent" >
+
+      <!-- Navbar Links -->
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0 " style="text-align: center;">
+        <li class="nav-item">
+          <a class="nav-link text-black text-decoration-underline active" aria-current="page" href="/">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-black text-decoration-none" href="#">About</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle text-black text-decoration-none" href="#" id="shopDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Shop</a>
+          <ul class="dropdown-menu" aria-labelledby="shopDropdown">
+            <li><a class="dropdown-item" href="#">Electronics</a></li>
+            <li><a class="dropdown-item" href="#">Men</a></li>
+            <li><a class="dropdown-item" href="#">Women</a></li>
+            <li><a class="dropdown-item" href="#">Child</a></li>
+          </ul>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-black text-decoration-none" href="#">Contact Us</a>
+        </li>
+      </ul>
+
+      <!-- Search Bar -->
+      <form method="get" action="/search" class="d-flex">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="search" id="search" />
+        <button class="btn btn-secondary" type="submit">Search</button>
+
+      </form>
+
+      <!-- User Links -->
+      <div>
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          {% if request.user.is_authenticated %}
+          <li class="nav-item dropdown mx-2">
+            <a class="nav-link dropdown-toggle" href="#" id="profileDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">{{ request.user }}</a>
+            <ul class="dropdown-menu" aria-labelledby="profileDropdown">
+              <li><a class="dropdown-item" href="{% url 'profile' %}">Profile</a></li>
+              <li><a class="dropdown-item" href="{% url 'orders' %}">Orders</a></li>
+              <li><a class="dropdown-item" href="{% url 'passwordchange' %}">Change Password</a></li>
+              <li>
+                <form action="{% url 'logout' %}" method="post" style="display: inline">
+                  {% csrf_token %}
+                  <button type="submit" class="dropdown-item">Logout</button>
+                </form>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item mx-2">
+            <a href="{% url 'showcart' %}" class="nav-link"><span class="badge bg-danger">{{ totalitem }}</span> Cart</a>
+          </li>
+          {% else %}
+          <li class="nav-item mx-2">
+            <a href="{% url 'login' %}" class="nav-link">Login</a>
+          </li>
+          <li class="nav-item mx-2">
+            <a href="{% url 'customerregistration' %}" class="nav-link">Registration</a>
+          </li>
+          {% endif %}
+        </ul>
+      </div>
+    </div>
+  </div>
+</nav>
+
+
+<!-- Announcement Bar -->
+<div class="announcement-bar bg-light py-2">
+  <div class="container d-flex justify-content-between">
+    <span><i class="bi bi-truck"></i> Free shipping on orders over ₹3000 in India</span>
+    <span><i class="bi bi-gift"></i> 20% Student Discount</span>
+    <span><i class="bi bi-tag"></i> 30% off on dresses. Use code: 30OFF</span>
+  </div>
+</div>
+
+    <!-- Banner Slider on home Page-->
+    {% block banner_slider %} {% endblock banner_slider %}
+    <!-- Live Sale on home Page-->
+    {% block livesale %} {% endblock livesale %}
+    <!-- Main Content-->
+    <!-- Main Content -->
+{% block main-content %}
+{% endblock %}
+
+{% block payment-gateway %}
+{% endblock %}
+
+
+    <!-- Start Footer -->
+    <footer class="container-fluid bg-dark text-center p-2 mt-5">
+      <small class="text-white"
+        >Copyright &copy; 2024 || Designed By Akhilesh ||
+      </small>
+      <img
+        src="{% static 'app/images/payment.png' %}"
+        alt=""
+        srcset=""
+        class="img-fluid"
+        height="2px"
+      />
+    </footer>
+    <!-- End Footer -->
+
+    <!-- Jquery -->
+    <script
+      src="https://code.jquery.com/jquery-3.5.1.min.js"
+      integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
+      crossorigin="anonymous"
+    ></script>
+    <!-- Bootstrap Bundle with Popper -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
+      crossorigin="anonymous"
+    ></script>
+
+    <script src="{% static 'app/js/owl.carousel.min.js' %}"></script>
+    <script src="{% static 'app/js/all.min.js' %}"></script>
+    <script src="{% static 'app/js/myscript.js' %}"></script>
+  </body>
+</html>
